@@ -1,4 +1,5 @@
 <?php
+//id sql
   $serveur = "localhost";
   $dbname = "moduleconnexion";
   $user = "root";
@@ -26,6 +27,7 @@
       $requete->bindParam(':password' ,$hashed_password);
 /*binParam = Identifiant. Pour une requête préparée utilisant des marqueurs nommés, ce sera le nom du paramètre sous la forme :name. Pour une requête préparée utilisant les marqueurs interrogatifs, ce sera la position indexé +1 du paramètre.*/
 
+    
 
       $login = $_POST['login'];
       $prenom = $_POST['prenom'];
@@ -51,8 +53,7 @@
       echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
   }
 
- 
- 
+
 
 if (isset($_POST['envoi'])){
     if(!empty($_POST['login']) AND !empty($_POST['prenom']) AND !empty($_POST['nom']) AND !empty($_POST['pass']) AND !empty($_POST['confirm'])){
