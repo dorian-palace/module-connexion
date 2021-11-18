@@ -17,22 +17,24 @@
           VALUES (:login,:prenom,:nom,:password)"
       );
 
+      
+      var_dump($hashed_password);
+
       $requete->bindParam(':login' ,$login);
       $requete->bindParam(':prenom' ,$prenom);
       $requete->bindParam(':nom' ,$nom);
-      $requete->bindParam(':password' ,$password);
+      $requete->bindParam(':password' ,$hashed_password);
 
       $login = $_POST['login'];
       $prenom = $_POST['prenom'];
       $nom = $_POST['nom'];
       $password = $_POST['password'];
+      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
       
 
       $requete->execute();
 
 //Ne pas utiliser hashed_password utilise password_hash voir la doc php.net
-      $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-      var_dump($hashed_password);
     
   }
 
