@@ -4,7 +4,7 @@
   $user = "root";
   $pass = "root";
   
- 
+  
   try{
       //On se connecte à la BDD
       $log = new PDO("mysql:host=$serveur;dbname=$dbname",$user,$pass);
@@ -24,6 +24,8 @@
       $requete->bindParam(':prenom' ,$prenom);
       $requete->bindParam(':nom' ,$nom);
       $requete->bindParam(':password' ,$hashed_password);
+/*binParam = Identifiant. Pour une requête préparée utilisant des marqueurs nommés, ce sera le nom du paramètre sous la forme :name. Pour une requête préparée utilisant les marqueurs interrogatifs, ce sera la position indexé +1 du paramètre.*/
+
 
       $login = $_POST['login'];
       $prenom = $_POST['prenom'];
@@ -31,18 +33,25 @@
       $password = $_POST['password'];
       $hashed_password = password_hash($password, PASSWORD_DEFAULT);
       
-
-      $requete->execute();
-
+      if($_POST['password'] !=$_POST['confirm']){
+        die("Mot de passe incorrect");//Si les mdp ne sont pas idendique (die)"mot de pass incorrect et ne crée pas d'utilisateurs dans la bdd
+    }else{
+        //Sinon execute la requete et crée l'utilisateurs dans la bdd
+    
+    
+     $requete->execute();
+ }
 //Ne pas utiliser hashed_password utilise password_hash voir la doc php.net
     
-  }
+ }
 
+ 
+// Erreur
   catch(PDOException $e){
       echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
   }
 
-  
+ 
  
 
 if (isset($_POST['envoi'])){
