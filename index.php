@@ -1,12 +1,26 @@
+<?php
+session_start();
+if (isset($_SESSION['login']))
+{
+    echo "Vous êtes connecté";
+}
+else
+{
+    
+}
+
+?>
+
+
 <h1> Module de connexion </h1>
 
 <h3></h3>
 
-<form method="GET" action="connexion.php">
+<form method="POST" action="connexion.php">
 <input type="submit" name="connexion" value="connexion" >
 </form>
 
-<form method="GET" action="inscription.php">
+<form method="POST" action="inscription.php">
 <input type="submit" name="inscription" value="inscription" >
 </form>
 

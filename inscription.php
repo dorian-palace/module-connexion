@@ -1,5 +1,6 @@
 <?php
 //id sql
+session_start();
 $serveur = "localhost";
 $dbname = "moduleconnexion";
 $user = "root";
