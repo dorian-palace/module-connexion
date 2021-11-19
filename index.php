@@ -6,7 +6,7 @@ if (isset($_SESSION['login']))
 }
 else
 {
-    
+    echo "non";
 }
 
 ?>
