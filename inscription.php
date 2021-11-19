@@ -18,28 +18,28 @@ catch(PDOException $e){
 }
 
 
-    $login = $_POST['login'];
-    $prenom = $_POST['prenom'];
-    $nom = $_POST['nom'];
-    $password = $_POST['password'];
+    @$login = $_POST['login'];
+    @$prenom = $_POST['prenom'];
+    @$nom = $_POST['nom'];
+    @$password = $_POST['password'];
 
     //htmlspecialchars — Convertit les caractères spéciaux en entités HTML
     //trim — Supprime les espaces (ou d'autres caractères) en début et fin de chaîne
-    $login = htmlspecialchars(trim($login));
-    $prenom = htmlspecialchars(trim($prenom));
-    $nom = htmlspecialchars(trim($nom));
-    $password = htmlspecialchars(trim($password));
+    @$login = htmlspecialchars(trim($login));
+    @$prenom = htmlspecialchars(trim($prenom));
+    @$nom = htmlspecialchars(trim($nom));
+    @$password = htmlspecialchars(trim($password));
 
     if (isset($_POST['envoi'])){
         if(!empty($_POST['login']) AND !empty($_POST['prenom']) AND !empty($_POST['nom']) AND !empty($_POST['pass']) AND !empty($_POST['confirm'])){
-            $login = htmlspecialchars($_POST['login']);//encodage 
-            $prenom = htmlspecialchars($_POST['prenom']);
-            $nom = htmlspecialchars($_POST['nom']);
-            $password = htmlspecialchars($_POST['password']);
+            @$login = htmlspecialchars($_POST['login']);//encodage 
+            @$prenom = htmlspecialchars($_POST['prenom']);
+            @$nom = htmlspecialchars($_POST['nom']);
+            @$password = htmlspecialchars($_POST['password']);
             
         }
         else{
-            echo "Remplissez ce champ";
+            echo "Remplissez ce champ<br/>";
         }
     } 
 
@@ -52,13 +52,15 @@ catch(PDOException $e){
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if($row['num'] > 0){
-          echo "Login deja pris";
+          echo "Login deja pris<br/>";
     }
     //LOGIN DEJA PRIS
 
+    elseif(empty($_POST['login']) && empty($_POST['password'])){
 
+    }
     elseif($_POST['password'] !=$_POST['confirm']){
-        die("Mot de passe incorrect");
+        die("Mot de passe incorrect<br/>");
     }//Si les mdp ne sont pas idendique (die)"mot de pass incorrect et ne crée pas d'utilisateurs dans la bdd
     else{
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -70,8 +72,11 @@ catch(PDOException $e){
         $stmt->bindParam(':nom' ,$nom);
         $stmt->bindParam(':password' ,$hashed_password);
   /*binParam = Identifiant. Pour une requête préparée utilisant des marqueurs nommés, ce sera le nom du paramètre sous la forme :name. Pour une requête préparée utilisant les marqueurs interrogatifs, ce sera la position indexé +1 du paramètre.*/
+        //if(empty($_POST['login']) && empty($_POST['password'])){
+            //die();
+        //}
         if($stmt->execute()){
-            echo "Bienvenue";
+            echo "Bienvenue<br/>";
         }
         else{
             $error = "Erreur: "; $e->getMessage();
@@ -79,8 +84,6 @@ catch(PDOException $e){
         
         
         }
-
-
 
 ?>
 
