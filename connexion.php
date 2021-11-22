@@ -46,7 +46,7 @@ $mdp ='root';
                 
                 if($userinfo['login']){
 
-                    header('location: profil.php');
+                    header('location: index.php');
                 }
 
             }else{
@@ -75,7 +75,7 @@ $mdp ='root';
 
 <a href="index.php">Accueil</a>
 <a href="connexion.php">Connexion</a>
-<a href="profil.php">Inscription</a>
+<a href="inscription.php">Inscription</a>
 
     <main class="main2 ">
 
@@ -91,7 +91,7 @@ $mdp ='root';
         <br />
    
 
-        <input type="submit"   name ='valider'value="valider">
+        <input type="submit"   name ='submit'value="submit">
 
     </form>
             </div>
