@@ -30,6 +30,7 @@ else
     <h3><a href="admin.php">Admin</a></h3>
 </ul>
 
+<a href="deconnexion.php">Déconnexion</a>
 <?php
 
 

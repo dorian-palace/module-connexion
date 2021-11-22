@@ -1,76 +1,105 @@
-<?php 
-//id sql
-
+<?php
 session_start();
-$serveur = "localhost";
-$dbname = "moduleconnexion";
-$user = "root";
-$pass = "root";
-
-try{ 
-    //Connexion BDD 
-    $log = new PDO("mysql:host=$serveur;dbname=$dbname",$user,$pass);
-    $log->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-// Erreur
-catch(PDOException $e){
-  echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
-}
-
-//Vérification 
-if (isset($_POST['login']) && isset($_POST['password'])){
 
 
-  if(!empty($_POST['login']) && !empty($_POST['password']))
-  {
-    $login = $_POST['login'];
-    $req = $log->prepare('SELECT id, password FROM utilisateurs WHERE login= :login');//Prépare une requête à l'exécution et retourne un objet
-    $req-> execute(array(
-      //Exécute une requête préparée
-      'login' => $login));
 
-      $result = $req->fetch();//fetch récupère les valeurs de la requete
 
-      if(!$result OR !password_verify($_POST['password'], $result['password'])){
-        //Vérifie qu'un mot de passe correspond à un hachage
+$servname = 'localhost';
+$dbname = 'moduleconnexion';  // log de connexion à la bdd 
+$user = 'root';
+$mdp ='root';
+
+
+ try{
+    $bdd = new PDO("mysql:host=$servname;dbname=$dbname","$user","$mdp");//connexion à la bdd
+     $bdd-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    
+    
+    // message en cas d'erreur 
+ 
         
-        echo 'Identifiant ou mot de passe incorrect.<br/>';
-      }
-      else{
-        $_SESSION['login'] = $user['login'];
-        $_SESSION['password'] = $user['password'];
-        echo 'Vous êtes connecté ! <br/>';
-        header('location: profil.php');
-      }
-      $req->closeCursor();//permet a la requete d'etre de nouveau executée
-  }
-  else
-  {
-    echo 'Renseignez un identifiant !<br.>';
-  }
+        if(isset($_POST['submit'])){//Si ce qui est envoyer a une valeur 
 
+            $login = htmlspecialchars($_POST['login']);
+            $password = sha1($_POST['password']);
+            
+            
+           
+            if(!empty($login) && !empty($password)){//Si login et password n'est pas vide
+
+                $requser = $bdd->prepare("SELECT * FROM utilisateurs WHERE login= :login AND password= :password");//préparation de la requete 
+                $requser->bindValue(':login', $login);//Associe une valeur à un paramètre 
+                $requser->bindValue(':password', $password);//Associe une valeur à un paramètre 
+                $requser->execute(); //execution de la requete
+                $userexist = $requser->rowCount();//Retourne le nombre de lignes affectées par le dernier appel à la fonction 
+
+                if($userexist == 1 ){
+                    
+                    $userinfo = $requser->fetch();//recupere le resultat
+                    $_SESSION['id'] = $userinfo['id'];
+                    $_SESSION['login'] = $userinfo['login'];
+                    $_SESSION['nom'] = $userinfo['nom'];
+                    $_SESSION['prenom'] = $userinfo['prenom'];
+                    $_SESSION['password'] = $userinfo['password'];
+                    
+                
+                if($userinfo['login']){
+
+                    header('location: profil.php');
+                }
+
+            }else{
+
+                echo '<p class="erreur">'.'Mauvais identifint ou mot de passe'. '</p>';
+            }
+            }
+            
+        }
+     
+}   catch(PDOException $e){
+    
+    echo 'echec : ' .$e->getMessage();
 }
 ?>
-<html>
-   <head>
-      <title>Connexion</title>
-      <meta charset="utf-8">
-   </head>
-   <body>
-      <div align="center">
-         <h2>Connexion</h2>
-         <br /><br />
-         <form method="POST" action="">
-            <input type="text" name="login" placeholder="login" />
-            <input type="password" name="password" placeholder="password" />
-            <br /><br />
-            <input type="submit" name="submit" value="Se connecter !" />
-         </form>
-         <?php
-         if(isset($erreur)) {
-            echo '<font color="red">'.$erreur."</font>";
-         }
-         ?>
-      </div>
-   </body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>connexion</title>
+</head>
+<body>
+
+<a href="index.php">Accueil</a>
+<a href="connexion.php">Connexion</a>
+<a href="profil.php">Inscription</a>
+
+    <main class="main2 ">
+
+        <div class="container2">
+    <form class="formulaire2" action="#" method="post">
+
+    <h1>Connexion</h1>
+    <br />
+         <br />
+        <input type="text" name="login" value="login" require>
+        <br>
+        <input type="password" name='password' value="password" require>
+        <br />
+   
+
+        <input type="submit"   name ='valider'value="valider">
+
+    </form>
+            </div>
+            <button ><a href="deconnexion">Se deconnecter</a></button>
+
+</main>
+
+
+
+</body>
 </html>

@@ -1,11 +1,25 @@
 <?php
 session_start();
-$bdd = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root','root');
-//connexion BDD
+$serveur = "localhost";
+$dbname = "moduleconnexion";
+$userbdd = "root";
+$pass = "root";
+
+try{ 
+    //Connexion BDD 
+    $bdd = new PDO("mysql:host=$serveur;dbname=$dbname",$userbdd,$pass);
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 
 
+}//try
+
+
+catch(PDOException $e){
+    echo 'Impossible de traiter les données. Erreur : '.$e->getMessage();
+  }
+  
 ?>
 	<html>
 	   <head>
@@ -14,16 +28,20 @@ $bdd = new PDO('mysql:host=localhost;dbname=moduleconnexion', 'root','root');
 	   </head>
 	   <body>
 	      <div align="center">
+              <h2><?php echo $user['prenom']; ?></h2>
 	         <h2>Modifier votre profil</h2>
 	         <br /><br />
 	         <form method="POST" action="">
-	            <input type="text" name="newlogin" placeholder="login" />
-                <input type="text" name="newprenom" placeholder="prenom" />
-                <input type="text" name="newnom" placeholder="nom" />
-	            <input type="password" name="newpassword" placeholder="password" />
+	            <input type="text" name="newlogin" placeholder="login" value="<?php echo $user ?>" /><br /><br />
+                <input type="text" name="newprenom" placeholder="prenom" value="" /><br /><br />
+                <input type="text" name="newnom" placeholder="nom" /><br /><br />
+	            <input type="password" name="newpassword1" placeholder="password" /><br /><br />
+                <input type="password" name="newpassword2" placeholder="password" />
 	            <br /><br />
 	            <input type="submit" name="modification" value="Modifier !" />
 	         </form>
+             <a href="index.php">Accueil</a>
+             <a href="deconnexion.php">Déconnexion</a>
 	         <?php
 	         if(isset($erreur)) {
 	            echo '<font color="red">'.$erreur."</font>";

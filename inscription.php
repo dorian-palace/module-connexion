@@ -21,7 +21,7 @@ catch(PDOException $e){
     @$login = $_POST['login'];
     @$prenom = $_POST['prenom'];
     @$nom = $_POST['nom'];
-    @$password = $_POST['password'];
+    @$password = sha1($_POST['password']);
 
     //htmlspecialchars — Convertit les caractères spéciaux en entités HTML
     //trim — Supprime les espaces (ou d'autres caractères) en début et fin de chaîne
@@ -63,14 +63,14 @@ catch(PDOException $e){
         die("Mot de passe incorrect<br/>");
     }//Si les mdp ne sont pas idendique (die)"mot de pass incorrect et ne crée pas d'utilisateurs dans la bdd
     else{
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         $sql1 = "INSERT INTO utilisateurs(login,prenom,nom,password)
         VALUES (:login,:prenom,:nom,:password)";
         $stmt = $log->prepare($sql1);
         $stmt->bindParam(':login' ,$login);
         $stmt->bindParam(':prenom' ,$prenom);
         $stmt->bindParam(':nom' ,$nom);
-        $stmt->bindParam(':password' ,$hashed_password);
+        $stmt->bindParam(':password' ,$password);
   /*binParam = Identifiant. Pour une requête préparée utilisant des marqueurs nommés, ce sera le nom du paramètre sous la forme :name. Pour une requête préparée utilisant les marqueurs interrogatifs, ce sera la position indexé +1 du paramètre.*/
         //if(empty($_POST['login']) && empty($_POST['password'])){
             //die();
@@ -86,7 +86,6 @@ catch(PDOException $e){
         }
 
 ?>
-
 <form name="inscription" method="POST" action="" align="center">
 <fieldset>
     <legend><h2>Inscription</h2></legend>
@@ -105,3 +104,5 @@ catch(PDOException $e){
 
 </fieldset>
 </form>
+<a href="index.php">Accueil</a>
+<a href="deconnexion.php">Déconnexion</a>
