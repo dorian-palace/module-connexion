@@ -11,7 +11,7 @@ $mdp ='root';
     $bdd = new PDO("mysql:host=$servname;dbname=$dbname","$user","$mdp");//connexion à la bdd
      $bdd-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);;
 
-$utilisateurs = $bdd->query("SELECT * FROM utilisateurs ORDER BY id DESC");
+$utilisateurs = $bdd->query("SELECT * FROM utilisateurs ORDER BY id DESC");//requete 
  
 ?>
 
@@ -27,7 +27,7 @@ $utilisateurs = $bdd->query("SELECT * FROM utilisateurs ORDER BY id DESC");
 <body>
 <header>
        
-    <a href="index.php">Accueil</a>
+    <a href="index.php" >Accueil</a>
     <a href="connexion.php">Connexion</a>
     <a href="inscription.php">Inscription</a>
                    
