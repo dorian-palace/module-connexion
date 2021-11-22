@@ -1,5 +1,6 @@
 <?php 
 //id sql
+
 session_start();
 $serveur = "localhost";
 $dbname = "moduleconnexion";
@@ -32,10 +33,14 @@ if (isset($_POST['login']) && isset($_POST['password'])){
 
       if(!$result OR !password_verify($_POST['password'], $result['password'])){
         //Vérifie qu'un mot de passe correspond à un hachage
+        
         echo 'Identifiant ou mot de passe incorrect.<br/>';
       }
       else{
+        $_SESSION['login'] = $user['login'];
+        $_SESSION['password'] = $user['password'];
         echo 'Vous êtes connecté ! <br/>';
+        header('location: profil.php');
       }
       $req->closeCursor();//permet a la requete d'etre de nouveau executée
   }
@@ -43,31 +48,29 @@ if (isset($_POST['login']) && isset($_POST['password'])){
   {
     echo 'Renseignez un identifiant !<br.>';
   }
-  
+
 }
 ?>
-
-
-
-<form action="connexion.php" method="post">
-  <div class="container">
-    <label for="login"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" id="login"name="login" required>
-
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" id="password" name="password" required>
-
-    <button type="submit" name="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-</form>
-
-
-
-<?php
-
-
-
-?>
+<html>
+   <head>
+      <title>Connexion</title>
+      <meta charset="utf-8">
+   </head>
+   <body>
+      <div align="center">
+         <h2>Connexion</h2>
+         <br /><br />
+         <form method="POST" action="">
+            <input type="text" name="login" placeholder="login" />
+            <input type="password" name="password" placeholder="password" />
+            <br /><br />
+            <input type="submit" name="submit" value="Se connecter !" />
+         </form>
+         <?php
+         if(isset($erreur)) {
+            echo '<font color="red">'.$erreur."</font>";
+         }
+         ?>
+      </div>
+   </body>
+</html>
