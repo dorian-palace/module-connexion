@@ -2,8 +2,6 @@
 session_start();
 
 
-
-
 $servname = 'localhost';
 $dbname = 'moduleconnexion';  // log de connexion à la bdd 
 $user = 'root';
