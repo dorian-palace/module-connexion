@@ -1,9 +1,9 @@
 <?php
 session_start();
-$serveur = "localhost";
-$dbname = "moduleconnexion";
-$userbdd = "root";
-$pass = "root";
+$servname = 'localhost';
+$dbname = 'dorian-palace_moduleconnexion';  // log de connexion à la bdd 
+$user = 'moduleconnexion';
+$mdp ='moduleconnexion';
 
 try{ 
     //Connexion BDD 
@@ -69,14 +69,15 @@ catch(PDOException $e){
 	   <head>
 	      <title>Modification profil</title>
 	      <meta charset="utf-8">
+		  <link rel="stylesheet" href="module.css">
 	   </head>
 	   <body>
 	      <div align="center">
 	         <h2>Modifier votre profil</h2>
 	         <br /><br />
 	         <form method="POST" action="">
-	            <input type="text" name="newlogin" placeholder="login" value="<?php echo $user['login'] ?>" /><br /><br />
-                <input type="text" name="newprenom" placeholder="prenom" value="<?php echo $user['prenom'];  ?>" /><br /><br />
+	            <input type="text" name="newlogin" placeholder="login" value="<?php echo @$user['login'] ?>" /><br /><br />
+                <input type="text" name="newprenom" placeholder="prenom" value="<?php echo @$user['prenom'];  ?>" /><br /><br />
                 <input type="text" name="newnom" placeholder="nom" /><br /><br />
 	            <input type="password" name="newpassword1" placeholder="password" /><br /><br />
                 <input type="password" name="newpassword2" placeholder="password" />

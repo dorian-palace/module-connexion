@@ -3,9 +3,9 @@ session_start();
 
 
 $servname = 'localhost';
-$dbname = 'moduleconnexion';  // log de connexion à la bdd 
-$user = 'root';
-$mdp ='root';
+$dbname = 'dorian-palace_moduleconnexion';  // log de connexion à la bdd 
+$user = 'moduleconnexion';
+$mdp ='moduleconnexion';
 
 
  try{
@@ -66,18 +66,19 @@ $mdp ='root';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="module.css">
     <title>connexion</title>
 </head>
 <body>
-
+<div class="aco">
 <a href="index.php">Accueil</a>
 <a href="connexion.php">Connexion</a>
 <a href="inscription.php">Inscription</a>
+</div>
 
     <main class="main2 ">
 
-        <div class="container2">
+        <div class="contco">
     <form class="formulaire2" action="#" method="post">
 
     <h1>Connexion</h1>
@@ -90,10 +91,11 @@ $mdp ='root';
    
 
         <input type="submit"   name ='submit'value="submit">
+        <button ><a href="deconnexion">Se deconnecter</a></button>
 
     </form>
             </div>
-            <button ><a href="deconnexion">Se deconnecter</a></button>
+            
 
 </main>
 

@@ -1,10 +1,10 @@
 <?php
 //id sql
 session_start();
-$serveur = "localhost";
-$dbname = "moduleconnexion";
-$user = "root";
-$pass = "root";
+$servname = 'localhost';
+$dbname = 'dorian-palace_moduleconnexion';  // log de connexion à la bdd 
+$user = 'moduleconnexion';
+$mdp ='moduleconnexion';
 
 
 try{ 
@@ -86,7 +86,20 @@ catch(PDOException $e){
         }
 
 ?>
-<form name="inscription" method="POST" action="" align="center">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="module.css">
+    <title>Inscription</title>
+</head>
+<body>
+    
+
+</html>
+<form class="formins" name="inscription" method="POST" action="" align="center">
 <fieldset>
     <legend><h2>Inscription</h2></legend>
     Login<br>
@@ -106,3 +119,4 @@ catch(PDOException $e){
 </form>
 <a href="index.php">Accueil</a>
 <a href="deconnexion.php">Déconnexion</a>
+</body>

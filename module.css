@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+body{
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    background-color: beige;
+}
+
+.formins{
+    display: flex;
+    justify-content: center;
+}
+
+a{
+    display: flex;
+    justify-content: space-evenly;
+    text-decoration: none;
+}
+
+ul{
+    text-decoration: none;
+}
+
+.indexcoin{
+    display: flex;
+    justify-content:center;
+}
+
+.contco{
+    display: flex;
+    justify-content: center;
+}
+
+.aadmin, .aco{
+    display: flex;
+    justify-content: space-between;
+}
+   
+
+h1{
+    display: flex;
+    justify-content: center;
+}
