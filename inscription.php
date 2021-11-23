@@ -9,7 +9,7 @@ $mdp ='moduleconnexion';
 
 try{ 
     //Connexion BDD 
-    $log = new PDO("mysql:host=$servname;dbname=$dbname",$user,$pass);
+    $log = new PDO("mysql:host=$servname;dbname=$dbname",$user,$mdp);
     $log->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 // Erreur
