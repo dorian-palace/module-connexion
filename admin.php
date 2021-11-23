@@ -3,9 +3,9 @@ session_start();
 
 
 $servname = 'localhost';
-$dbname = 'moduleconnexion';  // log de connexion à la bdd 
-$user = 'root';
-$mdp ='root';
+$dbname = 'dorian-palace_moduleconnexion';  // log de connexion à la bdd 
+$user = 'moduleconnexion';
+$mdp ='moduleconnexion';
 
 
     $bdd = new PDO("mysql:host=$servname;dbname=$dbname","$user","$mdp");//connexion à la bdd
