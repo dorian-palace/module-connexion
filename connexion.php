@@ -42,10 +42,11 @@ $mdp ='moduleconnexion';
                     $_SESSION['password'] = $userinfo['password'];
                     
                 
-                if($userinfo['login']){
+                if ($_POST['login'] == 'admin')
 
-                    header('location: index.php');
-                }
+             {
+              header("location: admin.php" );
+             }
 
             }else{
 
