@@ -42,7 +42,7 @@ else
     <h3><a href="profil.php">Profil</a></h3>
     <h3><a href="admin.php">Admin</a></h3>
     <a href="deconnexion.php">Déconnexion</a>
-    <a href="https://github.com/dorian-palace/module-connexion"></a>
+    <a href="https://github.com/dorian-palace/module-connexion">Repo github</a>
 </ul>
 </div>
 
